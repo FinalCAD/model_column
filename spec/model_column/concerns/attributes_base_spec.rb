@@ -2,31 +2,32 @@ require 'spec_helper'
 
 require 'model_column/concerns/attributes_base'
 
-class BasicModelBase
-  include ModelColumn::AttributesBase
-
-  column :id
-end
-
 describe ModelColumn::AttributesBase do
-  describe "class" do
+  let!(:klass) do
+    Class.new do
+      include ModelColumn::AttributesBase
 
-    let(:klass) { BasicModelBase.new }
+      column :id
+    end
+  end
+
+  describe "instance accessors" do
+    let(:instance) { klass.new }
 
     describe "have accessors" do
       it do
-        expect(klass).to respond_to(:id=)
-        expect(klass).to respond_to(:id)
+        expect(instance).to respond_to(:id=)
+        expect(instance).to respond_to(:id)
       end
     end
 
     describe "set value" do
       let(:id) { 42 }
 
-      before { klass.id= id }
+      before { instance.id= id }
 
       it do
-        expect(klass.id).to eql(id)
+        expect(instance.id).to eql(id)
       end
     end
   end

@@ -1,31 +1,30 @@
 require 'spec_helper'
 
-class AttributeModelBase
-  include ModelColumn::Base::Attributes
-
-  column :index
-end
-
 describe ModelColumn::Base::Attributes do
-  describe "class" do
+  let!(:klass) do
+    Class.new do
+      include ModelColumn::Base::Attributes
 
-    let(:klass) { AttributeModelBase.new }
+      column :index
+    end
+  end
+
+  describe "instance methods" do
+    let(:instance) { klass.new }
 
     describe "have accessors" do
       it do
-        expect(klass).to respond_to(:index=)
-        expect(klass).to respond_to(:index)
+        expect(instance).to respond_to(:index=)
+        expect(instance).to respond_to(:index)
       end
     end
 
     describe "set value" do
       let(:index) { -1 }
 
-      before { klass.index= index }
+      before { instance.index= index }
 
-      it do
-        expect(klass.index).to eql(index)
-      end
+      it { expect(instance.index).to eql(index) }
     end
   end
 end
