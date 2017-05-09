@@ -1,5 +1,2 @@
-require "model_column/version"
-
-module ModelColumn
-  # Your code goes here...
-end
+require 'model_column/version'
+require 'model_column/public/model'
