@@ -27,4 +27,9 @@ describe ModelColumn::Base::Attributes do
       it { expect(instance.index).to eql(index) }
     end
   end
+
+  describe "#set_initial_values" do
+    let(:instance) { klass.new({ index: 999 }) }
+    it { expect(instance.index).to eql(999) }
+  end
 end
