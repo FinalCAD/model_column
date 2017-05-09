@@ -32,6 +32,27 @@ Or install it yourself as:
 
 ## Usage
 
+You can use model_column as
+
+```ruby
+require 'model_column'
+
+module Sample
+  module Services
+    class Activity
+      include ActiveModel::Validations
+      include ModelColumn::Base::Attributes
+
+      column :foo
+
+      validates :foo, presence: true
+    end
+  end
+end
+```
+
+and enjoy validations
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
